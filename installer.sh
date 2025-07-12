@@ -1,9 +1,21 @@
 #!/bin/bash
-# ========================================================
-#  One Click Pipe Node Installer by Clownyy
-#  Telegram: https://t.me/md_alfaaz
-#  GitHub: https://github.com/imscaryclown/
-# ========================================================
+# One Click Pipe Testnet Node Installer by Clownyy 🤡
+# GitHub: https://github.com/imscaryclown/pipe-node-setup-guide
+# Telegram: https://t.me/clownyy
+
+# === Auto elevate to sudo if not root ===
+if [ "$EUID" -ne 0 ]; then
+  if [ -f "$0" ]; then
+    echo "🔐 Script needs sudo/root permissions. Re-running with sudo..."
+    chmod +x "$0"
+    exec sudo "$0" "$@"
+  else
+    echo -e "\033[0;31m❌ This script must be run as root.\033[0m"
+    echo -e "\033[1;33m💡 Try this instead:\033[0m"
+    echo "curl -sSL https://raw.githubusercontent.com/imscaryclown/pipe-node-setup-guide/main/setup_pipe_node.sh | sudo bash"
+    exit 1
+  fi
+fi
 
 set -e
 
@@ -13,15 +25,14 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 CYAN='\033[1;36m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 ARCHIVE="pop-v0.3.2-linux-x64.tar.gz"
 INSTALL_DIR="/opt/popcache"
 POP_BIN="$INSTALL_DIR/pop"
 
-# === Banner ===
+# === Centered Banner ===
 clear
-
 center() {
   local str="$1"
   local color="${2:-$NC}"
@@ -34,15 +45,14 @@ center "==============================================================" "$CYAN"
 center "   _____ _                                 " "$CYAN"
 center "  / ____| |                                " "$CYAN"
 center " | |    | | _____      ___ __  _   _ _   _ " "$CYAN"
-center " | |    | |/ _ \ \ /\ / / '_ \| | | | | | |" "$CYAN"
-center " | |____| | (_) \ V  V /| | | | |_| | |_| |" "$CYAN"
-center "  \_____|_|\___/ \_/\_/ |_| |_|\__, |\__, |" "$CYAN"
+center " | |    | |/ _ \\ \\ /\\ / / '_ \\| | | | | | |" "$CYAN"
+center " | |____| | (_) \\ V  V /| | | | |_| | |_| |" "$CYAN"
+center "  \\_____|_|\\___/ \\_/\\_/ |_| |_|\\__, |\\__, |" "$CYAN"
 center "                                __/ | __/ |" "$CYAN"
 center "                               |___/ |___/ " "$CYAN"
 center "==============================================================" "$CYAN"
-center "🚀 One Click Pipe Node Installer by Clownyy " "$GREEN"
-center "📬 Telegram: https://t.me/md_alfaaz" "$BLUE"
-center "💻 GitHub: https://github.com/imscaryclown/" "$BLUE"
+center "🚀 One Click Pipe Node Installer by Clownyy 🤡" "$GREEN"
+center "📬 Telegram: https://t.me/clownyy" "$BLUE"
 center "==============================================================" "$CYAN"
 
 # === Menu ===
@@ -56,18 +66,18 @@ read -rp "$(echo -e "${CYAN}Choose an option [1-5]: ${NC}")" OPTION
 
 if [ "$OPTION" = "1" ]; then
   read -rp "$(echo -e "${YELLOW}Enter your INVITE CODE: ${NC}")" INVITE_CODE
-  read -rp "$(echo -e "${YELLOW}Enter a POP NAME (e.g. my-pop-node): ${NC}")" POP_NAME
-  read -rp "$(echo -e "${YELLOW}Enter your POP LOCATION (City, Country): ${NC}")" POP_LOCATION
+  read -rp "$(echo -e "${YELLOW}Enter POP NAME (e.g. my-pop-node): ${NC}")" POP_NAME
+  read -rp "$(echo -e "${YELLOW}Enter POP LOCATION (e.g. City, Country): ${NC}")" POP_LOCATION
   read -rp "$(echo -e "${YELLOW}Enter your SOLANA ADDRESS: ${NC}")" SOLANA_PUBKEY
   read -rp "$(echo -e "${YELLOW}Enter Memory Cache Size in MB (e.g. 4096): ${NC}")" MEMORY_SIZE_MB
   read -rp "$(echo -e "${YELLOW}Enter Disk Cache Size in GB (e.g. 100): ${NC}")" DISK_SIZE_GB
 
   NODE_NAME="node-01"
-  NAME="Your Name"
-  EMAIL="you@example.com"
-  WEBSITE="https://example.com"
-  TWITTER="clownyy"
-  DISCORD="clownyy#1234"
+  NAME="Clownyy"
+  EMAIL="[email protected]"
+  WEBSITE="https://t.me/clownyy"
+  TWITTER="imscaryclown"
+  DISCORD="clownyy#0001"
   TELEGRAM="clownyy"
   WORKERS=0
 
@@ -78,20 +88,36 @@ if [ "$OPTION" = "1" ]; then
 
   chmod 777 "$ARCHIVE"
 
-  useradd -m -s /bin/bash popcache || echo "User 'popcache' already exists."
+  useradd -m -s /bin/bash popcache || echo -e "${BLUE}User 'popcache' already exists.${NC}"
   usermod -aG sudo popcache
 
   apt update -y
   apt install -y libssl-dev ca-certificates curl tar jq
+
+  cat > /etc/sysctl.d/99-popcache.conf <<EOF
+net.ipv4.ip_local_port_range = 1024 65535
+net.core.somaxconn = 65535
+net.ipv4.tcp_low_latency = 1
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_slow_start_after_idle = 0
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_wmem = 4096 65536 16777216
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.core.wmem_max = 16777216
+net.core.rmem_max = 16777216
+EOF
+  sysctl --system
+
+  cat > /etc/security/limits.d/popcache.conf <<EOF
+*    hard nofile 65535
+*    soft nofile 65535
+EOF
 
   mkdir -p "$INSTALL_DIR" "$INSTALL_DIR/logs"
   tar -xzf "$ARCHIVE" -C "$INSTALL_DIR"
   chmod +x "$POP_BIN"
   chown -R popcache:popcache "$INSTALL_DIR"
   ln -sf "$POP_BIN" /usr/local/bin/pop
-
-  echo -e "${CYAN}🚀 Running the binary manually (in background)...${NC}"
-  # sudo -u popcache "$POP_BIN" &
 
   cat > "$INSTALL_DIR/config.json" <<EOF
 {
@@ -129,8 +155,18 @@ if [ "$OPTION" = "1" ]; then
 EOF
 
   chown popcache:popcache "$INSTALL_DIR/config.json"
+
+  # 🧼 Clean leftover lock file if exists
+  LOCK_FILE="$INSTALL_DIR/.pop.lock"
+  if [ -f "$LOCK_FILE" ]; then
+    echo -e "${YELLOW}⚠️  Removing leftover lock file...${NC}"
+    rm -f "$LOCK_FILE"
+  fi
+
+  # ✅ Validate configuration
   sudo -u popcache "$POP_BIN" --validate-config
 
+  # 🔧 Setup systemd service
   cat > /etc/systemd/system/popcache.service <<EOF
 [Unit]
 Description=POP Cache Node
@@ -153,46 +189,27 @@ Environment=POP_CONFIG_PATH=$INSTALL_DIR/config.json
 WantedBy=multi-user.target
 EOF
 
+  # 🚀 Start the service
+  systemctl daemon-reexec
   systemctl daemon-reload
-  systemctl enable --now popcache.service
-# === Allow ports ===
-sudo ufw allow 22
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow ssh
-sudo ufw enable
-sudo ufw reload
+  systemctl enable popcache
+  systemctl restart popcache
 
-  echo -e "\n${GREEN}✅ Pipe POP Node service installed and enabled!${NC}"
-  echo -e "${BLUE}📄 View logs: journalctl -u popcache -f${NC}"
-  echo -e "${CYAN}🚀 Manually running the node now (foreground below):${NC}"
-  sudo -u popcache "$POP_BIN"
+  echo -e "${GREEN}✅ POP Node service started via systemd.${NC}"
+  echo -e "${CYAN}📜 To view logs: ${NC}journalctl -u popcache -f"
 
 elif [ "$OPTION" = "2" ]; then
-  echo -e "${CYAN}🔍 Fetching POP metrics, state, and health...${NC}"
-  curl -sk http://localhost/metrics | jq . || echo -e "${RED}Could not fetch metrics${NC}"
-  curl -sk http://localhost/state | jq . || echo -e "${RED}Could not fetch state${NC}"
-  curl -sk http://localhost/health | jq . || echo -e "${RED}Could not fetch health${NC}"
+  curl -sk http://localhost/metrics | jq .
+  curl -sk http://localhost/state | jq .
+  curl -sk http://localhost/health | jq .
 
 elif [ "$OPTION" = "3" ]; then
-  echo -e "${CYAN}🌍 Fetching public IP and server info...${NC}"
-  apt install -y curl jq >/dev/null 2>&1
-  IP_DATA=$(curl -s https://ipinfo.io)
-  if [ -n "$IP_DATA" ]; then
-    echo "$IP_DATA" | jq .
-  else
-    echo -e "${RED}Failed to fetch IP info from ipinfo.io${NC}"
-  fi
+  curl -s https://ipinfo.io | jq .
 
 elif [ "$OPTION" = "4" ]; then
-  echo -e "${BLUE}📜 Showing logs for popcache service...${NC}"
   journalctl -u popcache -f
 
-elif [ "$OPTION" = "5" ]; then
-  echo -e "${GREEN}👋 Exiting...${NC}"
-  exit 0
-
 else
-  echo -e "${RED}Invalid option. Exiting.${NC}"
-  exit 1
+  echo -e "${RED}❌ Invalid option or exiting.${NC}"
+  exit 0
 fi
