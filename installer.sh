@@ -5,13 +5,6 @@
 #  GitHub: https://github.com/imscaryclown/
 # ========================================================
 
-# === Auto elevate to sudo if not root ===
-if [ "$EUID" -ne 0 ]; then
-  echo -e "\033[1;33m🔐 Script needs sudo/root permissions. Re-running with sudo...\033[0m"
-  chmod +x "$0"
-  exec sudo "$0" "$@"
-fi
-
 set -e
 
 # === Colors ===
