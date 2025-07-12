@@ -24,9 +24,9 @@ Welcome to pipe node setup guide. You can  use this one click installer to insta
 - 5️⃣ Exit - exit the installer
  ---
 # Installation (One click)
-   
-    bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)
- 
+```
+bash <(curl -s bash <(curl -sSL https://raw.githubusercontent.com/imscaryclown/pipe-node-setup-guide/main/installer.sh)
+```
 
 - 🔑 Enter the invite code
 - 🏷 Enter pop name (anything you want)
@@ -55,4 +55,10 @@ tail -f /opt/popcache/logs/stdout.log
 https://dashboard.testnet.pipe.network/node/
 ```
 - add the pop id at the end of the link and open it
-  
+<img width="1532" height="851" alt="Screenshot 2025-07-12 171724" src="https://github.com/user-attachments/assets/62c1d289-7b71-47df-9a7d-12cf9a4206e2" />
+
+--- 
+
+## 🙋 Need Help?
+- 💬 **Contact:** [@Clownyy](https://t.me/md_alfaaz)
+- 📺 **Guides & Updates:** [@Hustle_Airdrops](https://t.me/Hustle_Airdrops)
