@@ -19,7 +19,7 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 
 - 3️⃣ Chek Ip Info - get the location of your vps which you will use in the node
 
-- 4️⃣ See Node Logs - view the node logs
+- 4️⃣ See Node Logs - view the full node logs
 
 - 5️⃣ Exit - exit the installer
  ---
@@ -40,3 +40,5 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 ``` 
 chmod +x installer.sh
 ./installer.sh 
+
+## ✅️ Check Service Status
