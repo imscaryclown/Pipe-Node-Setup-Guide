@@ -91,7 +91,7 @@ if [ "$OPTION" = "1" ]; then
   ln -sf "$POP_BIN" /usr/local/bin/pop
 
   echo -e "${CYAN}🚀 Running the binary manually (in background)...${NC}"
-  sudo -u popcache "$POP_BIN" &
+  # sudo -u popcache "$POP_BIN" &
 
   cat > "$INSTALL_DIR/config.json" <<EOF
 {
