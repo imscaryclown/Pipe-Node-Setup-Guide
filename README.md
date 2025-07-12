@@ -24,40 +24,11 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 
 # Installation (One click)
 
-This won’t copy to clipboard but can **link to the raw script**. GitHub users can right-click > Copy.
-
 ---
-
-### ✅ Option 2: Use GitHub’s built-in copy button
-
-When you use fenced code blocks like:
 
     ```bash
     bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)
-    ```
-
-GitHub **automatically adds a small copy button in the top right of the code block** on its website (on desktop). No need to do anything extra.
-
-📌 Just make sure you're using proper fenced blocks (three backticks).
-
----
-
-### ✅ Option 3: GitHub Pages + JS Button (if you want real interactivity)
-
-If you want an actual **"Click to Copy" button**, you'll need to host a custom HTML page using **GitHub Pages** and embed JavaScript like:
-
-```html
-<pre>
-<code id="my-command">bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)</code>
-<button onclick="copyText()">Copy</button>
-</pre>
-
-<script>
-function copyText() {
-  const code = document.getElementById("my-command").innerText;
-  navigator.clipboard.writeText(code);
-}
-</script>
+ 
 
 - 🔑 Enter the invite code
 - 🏷 Enter pop name (anything you want)
