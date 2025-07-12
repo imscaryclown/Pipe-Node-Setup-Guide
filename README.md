@@ -5,21 +5,21 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 | :-------- | :------- | :------------------------- |
 | **4+ Cores** | **16 GB** | **100 GB+** |
 
-### Pre-Requirements
+### 💻 Pre-Requirements
 - You need to have invite code of pipe node
 - If you have filled the form search it in your email for the invite code
 
-## Menu Options
+## 💿 Menu Options
 
-1️⃣ Install Node - install fresh node
+- 1️⃣ Install Node - install fresh node
 
-2️⃣ Check Node Info - get node id which you use to track your pop node on dashboard
+- 2️⃣ Check Node Info - get node id which you use to track your pop node on dashboard
 
-3️⃣ Chek Ip Info - get the location of your vps which you will use in the node
+- 3️⃣ Chek Ip Info - get the location of your vps which you will use in the node
 
-4️⃣ See Node Logs - view the node logs
+- 4️⃣ See Node Logs - view the node logs
 
-5️⃣ Exit - exit the installer
+- 5️⃣ Exit - exit the installer
 
 # Installation (One click)
 
