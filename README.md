@@ -27,6 +27,8 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)```
 
+## 🔩 Changes in config
+
 - 🔑 Enter the invite code
 - 🏷 Enter pop name (anything you want)
 - 📍 Enter vps location (city & country) use menu option 3 for these details
