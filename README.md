@@ -20,4 +20,9 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 4️⃣ See Node Logs - view the node logs
 
 5️⃣ Exit - exit the installer
+
+# Installation (One click)
+
+```bash <(curl -s https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/PATH_TO_SCRIPT.sh)```
+
    
