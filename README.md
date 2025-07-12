@@ -34,3 +34,8 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 - 🗝 Enter solana address
 - 🖥 enter ram in mb (1gb = 1024mb)
 - 💾 enter disk in gb (e.g 100)
+
+## ▶️ Start Node
+
+``` chmod +x installer.sh
+    ./installer.sh
