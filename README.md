@@ -1,5 +1,5 @@
 # 🚀 Pipe-Node-Setup-Guide
-Welcome to my pipe node setup guide. Use this one click installer to installer node without any hassle.
+Welcome to pipe node setup guide. You can  use this one click installer to install node without any hassle.
 ---   ---
 ## 💻 Hardware Requirements
 | CPU | Ram     | Storage               |
