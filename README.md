@@ -23,8 +23,5 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 
 # Installation (One click)
 
- ```
-function test() {
-  console.log("bash <(curl -s https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/PATH_TO_SCRIPT.sh)");
-}
-```
+```bash
+bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)
