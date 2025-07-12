@@ -26,3 +26,10 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)```
+
+- 🔑 Enter the invite code
+- 🏷 Enter pop name (anything you want)
+- 📍 Enter vps location (city & country) use menu option 3 for these details
+- 🗝 Enter solana address
+- 🖥 enter ram in mb (1gb = 1024mb)
+- 💾 enter disk in gb (e.g 100)
