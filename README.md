@@ -39,6 +39,20 @@ Welcome to pipe node setup guide. You can  use this one click installer to insta
 
 ``` 
 chmod +x installer.sh
-./installer.sh 
-
-## ✅️ Check Service Status
+./installer.sh
+````
+## Check Node Status & Logs
+- **Check if node is running**
+```
+sudo systemctl status popcache
+```
+- **Check Full Logs**
+```
+tail -f /opt/popcache/logs/stdout.log
+```
+# Dashboard
+```
+https://dashboard.testnet.pipe.network/node/
+```
+- add the pop id at the end of the link and open it
+  
