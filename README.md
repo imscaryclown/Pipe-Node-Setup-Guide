@@ -25,7 +25,8 @@ Welcome to pipe node setup guide. You can  use this one click installer to insta
  ---
 # Installation (One click)
 ```
-bash <(curl -sSL https://raw.githubusercontent.com/imscaryclown/pipe-node-setup-guide/main/installer.sh)
+curl -sSL https://raw.githubusercontent.com/imscaryclown/pipe-node-setup-guide/main/installer.sh | sudo bash
+
 ```
 
 - 🔑 Enter the invite code
