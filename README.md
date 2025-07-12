@@ -37,5 +37,6 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 
 ## ▶️ Start Node
 
-``` chmod +x installer.sh
-    ./installer.sh
+``` 
+chmod +x installer.sh
+./installer.sh 
