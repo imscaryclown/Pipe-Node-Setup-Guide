@@ -4,19 +4,6 @@
 #  Telegram: https://t.me/md_alfaaz
 #  GitHub: https://github.com/imscaryclown/
 # ========================================================
-# === Auto sudo if not root ===
-if [ "$EUID" -ne 0 ]; then
-  if [ -f "$0" ]; then
-    echo "🔐 Script needs sudo/root permissions. Re-running with sudo..."
-    chmod +x "$0"
-    exec sudo "$0" "$@"
-  else
-    echo -e "\033[0;31m❌ This script must be run with sudo/root.\033[0m"
-    echo -e "\033[1;33m💡 Run it like this:\033[0m"
-    echo "curl -sSL https://raw.githubusercontent.com/imscaryclown/pipe-node-setup-guide/main/installer.sh | sudo bash"
-    exit 1
-  fi
-fi
 
 set -e
 
