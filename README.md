@@ -1,5 +1,6 @@
 # 🚀 Pipe-Node-Setup-Guide
 Welcome to my pipe node setup guide. Use this one click installer to installer node without any hassle.
+---
 ## 💻 Hardware Requirements
 | CPU | Ram     | Storage               |
 | :-------- | :------- | :------------------------- |
@@ -9,7 +10,7 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 - You need to have invite code of pipe node
 - If you have filled the form search it in your email for the invite code
 - Get the location and country of the vps using menu option 3
-
+---
 ## ⚙️ Menu Options
 
 - 1️⃣ Install Node - install fresh node
@@ -21,12 +22,9 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 - 4️⃣ See Node Logs - view the node logs
 
 - 5️⃣ Exit - exit the installer
-
+ ---
 # Installation (One click)
-
----
-
-    ```bash
+   
     bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)
  
 
