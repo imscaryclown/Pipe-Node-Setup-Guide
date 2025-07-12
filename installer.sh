@@ -4,7 +4,12 @@
 #  Telegram: https://t.me/md_alfaaz
 #  GitHub: https://github.com/imscaryclown/
 # ========================================================
-
+# === Auto sudo if not root ===
+if [ "$EUID" -ne 0 ]; then
+  echo "🔐 Script needs sudo/root permissions. Re-running with sudo..."
+  chmod +x "$0"
+  exec sudo "$0" "$@"
+fi
 set -e
 
 # === Colors ===
