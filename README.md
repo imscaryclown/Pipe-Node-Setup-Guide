@@ -25,7 +25,7 @@ Welcome to my pipe node setup guide. Use this one click installer to installer n
 # Installation (One click)
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/username/repo/main/install.sh)```
 
 - 🔑 Enter the invite code
 - 🏷 Enter pop name (anything you want)
