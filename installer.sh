@@ -94,6 +94,7 @@ if [ "$OPTION" = "1" ]; then
   apt update -y
   apt install -y libssl-dev ca-certificates curl tar jq
 
+  # 🔧 System tuning
   cat > /etc/sysctl.d/99-popcache.conf <<EOF
 net.ipv4.ip_local_port_range = 1024 65535
 net.core.somaxconn = 65535
@@ -119,6 +120,7 @@ EOF
   chown -R popcache:popcache "$INSTALL_DIR"
   ln -sf "$POP_BIN" /usr/local/bin/pop
 
+  # 🔧 Generate config
   cat > "$INSTALL_DIR/config.json" <<EOF
 {
   "pop_name": "$POP_NAME",
@@ -156,15 +158,17 @@ EOF
 
   chown popcache:popcache "$INSTALL_DIR/config.json"
 
-  # 🧼 Clean leftover lock file if exists
+  # 🧼 Clean .pop.lock
   LOCK_FILE="$INSTALL_DIR/.pop.lock"
   if [ -f "$LOCK_FILE" ]; then
     echo -e "${YELLOW}⚠️  Removing leftover lock file...${NC}"
     rm -f "$LOCK_FILE"
   fi
 
-  # ✅ Validate configuration
-  sudo -u popcache "$POP_BIN" --validate-config
+  # ✅ Validate config from inside the install directory
+  chown -R popcache:popcache "$INSTALL_DIR"
+  chmod -R 755 "$INSTALL_DIR"
+  sudo -u popcache bash -c "cd $INSTALL_DIR && ./pop --validate-config"
 
   # 🔧 Setup systemd service
   cat > /etc/systemd/system/popcache.service <<EOF
@@ -189,7 +193,6 @@ Environment=POP_CONFIG_PATH=$INSTALL_DIR/config.json
 WantedBy=multi-user.target
 EOF
 
-  # 🚀 Start the service
   systemctl daemon-reexec
   systemctl daemon-reload
   systemctl enable popcache
