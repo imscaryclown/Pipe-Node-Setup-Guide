@@ -56,6 +56,7 @@ center "📬 Telegram: https://t.me/clownyy" "$BLUE"
 center "==============================================================" "$CYAN"
 
 # === Menu ===
+while true; do
 echo -e "${YELLOW}1.${NC} Install New Node"
 echo -e "${YELLOW}2.${NC} Get POP ID & Node Info"
 echo -e "${YELLOW}3.${NC} Get Full IP & Server Info"
